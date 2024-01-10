@@ -1,0 +1,20 @@
+name: Test
+on:
+  pull_request:
+    branches: '*'
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    name: "Run basic test suite"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Clone project repository"
+        uses: actions/checkout@v3
+      - name: "Install kind"
+        run: ./scripts/install-kind.sh
+      - name: "Install Kubectl"
+        run: ./scripts/install-kubectl.sh
+      - name: "Run test"
+        run: ./scripts/run-cluster-test.sh
